@@ -1,4 +1,5 @@
 import MobileNav from "@/components/MobileNav";
+import RightSidebar from "@/components/RightSidebar";
 import Sidebar from "@/components/Sidebar";
 import Image from "next/image";
 
