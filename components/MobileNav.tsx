@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import {
     Sheet,
@@ -19,6 +19,13 @@ import PlaidLink from './PlaidLink'
 
 
 const MobileNav = ({ user }: MobileNavProps) => {
+    const [windowWidth, setWindowWidth] = useState<number | null>(null);
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            setWindowWidth(window.innerWidth);
+        }
+    }, []);
     const pathname = usePathname()
     return (
         <section className='w-full max-w-[264px]'>
@@ -46,7 +53,7 @@ const MobileNav = ({ user }: MobileNavProps) => {
                                         <SheetClose asChild key={item.route}>
 
 
-                                            <Link href={item.route} key={item.label} className={cn('mobilenav-sheet_close w-full', { 'bg-bankGradient': isActive })}>
+                                            <Link prefetch={true} href={item.route} key={item.label} className={cn('mobilenav-sheet_close w-full', { 'bg-bankGradient': isActive })}>
 
                                                 <Image src={item.imgURL} alt={item.label} width={20}
                                                     height={20} className=
@@ -67,7 +74,7 @@ const MobileNav = ({ user }: MobileNavProps) => {
                               <PlaidLink user={user} variant='ghost'/>
                             </nav>
                         </SheetClose>
-                       <Footer type={window?.innerWidth < 768 ? 'mobile' : 'desktop'} user={user}/>
+                       <Footer type={windowWidth!=null && windowWidth < 768 ? 'mobile' : 'desktop'} user={user}/>
                     </div>
 
                 </SheetContent>
