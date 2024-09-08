@@ -27,13 +27,3 @@ Sentry.init({
   debug: false,
 });
 
-Sentry.init({
-  dsn: "https://1695c1acdfa0835f67e27764397625c4@o4507876999233536.ingest.de.sentry.io/4507877001134160",
-
-  integrations: [
-    Sentry.replayIntegration(),
-  ],
-  // Session Replay
-  replaysSessionSampleRate: 0.1, // This sets the sample rate at 10%. You may want to change it to 100% while in development and then sample at a lower rate in production.
-  replaysOnErrorSampleRate: 1.0, // If you're not already sampling the entire session, change the sample rate to 100% when sampling sessions where errors occur.
-});

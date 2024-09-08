@@ -25,6 +25,8 @@ import { Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { getLoggedInUser, signin, signup } from '@/lib/actions/user.actions'
 import PlaidLink from './PlaidLink'
+import useLoadingBar from '@/lib/hooks/useLoadingBar'
+import LoadingBar from 'react-top-loading-bar'
 
 
 
@@ -35,6 +37,9 @@ const AuthForm = ({ type}:{type:string}) => {
   const [isLoading, setIsLoading] = useState(false)
   const router=useRouter()
 
+  const {progress,handleLinkClick,setProgress1}=useLoadingBar()
+
+  
   const formSchema=authFormSchema(type);
   
         // 1. Define your form.
@@ -80,6 +85,9 @@ const AuthForm = ({ type}:{type:string}) => {
 
            
              if(response)  router.push('/')
+             handleLinkClick()
+              
+              
           }
 
           } catch (error) {
@@ -92,10 +100,15 @@ const AuthForm = ({ type}:{type:string}) => {
         }
 
   return (
-    <section className='auth-form'>
+    <section className='auth-form relative'>
+      <LoadingBar
+                color='#f11946'
+                progress={progress}
+                onLoaderFinished={() => setProgress1(0)}
+            />
      
      <header className='flex flex-col md:gap-8'>
-     <Link href="/" className='flex cursor-pointer items-center gap-2'>
+     <Link href="/" className='flex cursor-pointer absolute top-5 items-center gap-2'>
                         <Image src={"/icons/logo.svg"} width={34} height={34} alt='Horizon Logo' />
                         <h1 className='text-26 font-ibm-plex-serif font-bold text-black-1'>Horizon</h1>
     </Link>
@@ -146,6 +159,7 @@ const AuthForm = ({ type}:{type:string}) => {
 
 
       <CustomInput control={form.control} name="password" label="Password" placeholder="Enter your Password" type="password"/>
+     
       
       <div className='flex flex-col gap-4'>
         <Button type="submit" className='form-btn' disabled={isLoading}>
