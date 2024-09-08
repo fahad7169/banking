@@ -25,8 +25,8 @@ const Sidebar = ({user}:SiderbarProps )=> {
             />
      <nav className='flex flex-col gap-4'>
       <Link href="/" className='mb-12 flex cursor-pointer items-center gap-2'>
-      <Image src="/icons/logo.svg" width={34} height={34} alt='Horizon Logo' className='size-[24px] max-sl:size-14'/>
-      <h1 className='sidebar-logo'>Horizon</h1>
+      <Image src="/icons/logo.svg" width={34} height={34} alt='Silk Logo' className='size-[24px] max-sl:size-14'/>
+      <h1 className='sidebar-logo'>Silk</h1>
       </Link>
       {sidebarLinks.map((item)=>{
         const isActive=pathname===item.route || pathname.startsWith(`${item.route}/`)
