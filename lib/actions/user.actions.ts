@@ -136,26 +136,27 @@ export const logoutAccount = async () => {
   }
 }
 
-export const createLinkToken = async (user:User) => {
+export const createLinkToken = async (user: User) => {
   try {
     const tokenParams = {
-      user:{
-        client_user_id: user.$id
+      user: {
+        client_user_id: user.$id, // Unique user identifier
       },
-      client_name:`${user.firstName} ${user.lastName}`,
-      products:["auth"] as Products[],
-      language:"en",
-      country_codes:["US"]as CountryCode[],
+      client_name: `${user.firstName} ${user.lastName}`, // Name of your app
+      products: ["auth", "transactions"] as Products[], // Include "transactions"
+      language: "en", // Language preference
+      country_codes: ["US"] as CountryCode[], // Country codes as per your requirement
+    };
 
+    const response = await plaidClient.linkTokenCreate(tokenParams);
 
-    
-    }
-    const response=await plaidClient.linkTokenCreate(tokenParams);
-    return parseStringify({link_token:response.data.link_token})
+    return parseStringify({ link_token: response.data.link_token });
   } catch (error) {
-    console.log(error)
+    console.error("Error creating Plaid link token:", error);
+    throw error;
   }
-}
+};
+
 
 export const createBankAccount = async ({
  userId, accessToken, accountId, bankId, fundingSourceUrl, sharableId,

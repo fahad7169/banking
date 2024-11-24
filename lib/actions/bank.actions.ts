@@ -163,10 +163,10 @@ export const getTransactions = async ({
   accessToken,
 }: getTransactionsProps) => {
   let hasMore = true;
-  let transactions: any = [];
+  let transactions: any[] = []; // Initialize as an array to accumulate results
 
   try {
-    // Iterate through each page of new transaction updates for item
+    // Iterate through each page of new transaction updates for the item
     while (hasMore) {
       const response = await plaidClient.transactionsSync({
         access_token: accessToken,
@@ -174,7 +174,8 @@ export const getTransactions = async ({
 
       const data = response.data;
 
-      transactions = response.data.added.map((transaction) => ({
+      // Accumulate transactions from each page
+      const pageTransactions = data.added.map((transaction) => ({
         id: transaction.transaction_id,
         name: transaction.name,
         paymentChannel: transaction.payment_channel,
@@ -187,14 +188,17 @@ export const getTransactions = async ({
         image: transaction.logo_url,
       }));
 
-      hasMore = data.has_more;
+      transactions = [...transactions, ...pageTransactions]; // Merge with existing transactions
+      hasMore = data.has_more; // Check if there are more pages to fetch
     }
 
     return parseStringify(transactions);
   } catch (error) {
-    console.error("An error occurred while getting the accounts:", error);
+    console.error("An error occurred while getting the transactions:", error);
+    throw error; // Rethrow the error to handle it in the calling function
   }
 };
+
 
 // Create Transfer
 export const createTransfer = async () => {
