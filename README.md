@@ -1,8 +1,19 @@
+# Introduction
+Built with Next.js, Silk is a financial SaaS platform that connects to multiple bank accounts, displays transactions in real-time, allows users to transfer money to other platform users, and manages their finances altogether.
+
+
+# Some Images of Website
+
 ![Silk](Images/image.png)
 ![Silk](Images/image2.png)
 ![Silk](Images/image3.png)
 
-##
+# Visit the website
+
+https://silk-jet.netlify.app/
+
+
+#
 
 ![NextJs](https://camo.githubusercontent.com/d5419d45bd40bcd99f97e53993e1b56e0542fdd4d444974c59b5b5178a451545/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2d4e6578745f4a532d626c61636b3f7374796c653d666f722d7468652d6261646765266c6f676f436f6c6f723d7768697465266c6f676f3d6e657874646f746a7326636f6c6f723d303030303030)
 
@@ -12,8 +23,7 @@
 
 
 
-# Introduction
-Built with Next.js, Silk is a financial SaaS platform that connects to multiple bank accounts, displays transactions in real-time, allows users to transfer money to other platform users, and manages their finances altogether.
+
 
 
 # Tech Stack
